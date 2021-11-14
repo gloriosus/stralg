@@ -9,6 +9,10 @@ class SinglyLinkedList:
         self.cursor = self.head
     
     def get(self, index: int) -> int:
+        if index < 0:
+            self.cursor = None
+            return -1
+           
         self.cursor = self.head
 
         for i in range(index):
@@ -38,6 +42,7 @@ class SinglyLinkedList:
 
         return None
     
+    # TODO: add check for negative index
     def addAtIndex(self, index: int, value: int) -> None:
         if index == 0:
             self.addAtHead(value)
@@ -57,6 +62,7 @@ class SinglyLinkedList:
 
         node = ListNode(value, next)
         prev.next = node
+        self.cursor = node
 
         return None
     
