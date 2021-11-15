@@ -6,28 +6,27 @@ class ListNode:
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
-        self.cursor = self.head
     
     # O(n)
     def get_node(self, value):
-        cursor = self.head
+        current = self.head
 
-        while cursor is not None:
-            if cursor.value == value:
-                return cursor
-            cursor = cursor.next
+        while current is not None:
+            if current.value == value:
+                return current
+            current = current.next
 
         return None
     
     # O(n)
     def find_value(self, index: int):
-        cursor = self.head
+        current = self.head
         count = 0
 
-        while cursor is not None:
+        while current is not None:
             if count == index:
-                return cursor.value
-            cursor = cursor.next
+                return current.value
+            current = current.next
             count = count + 1
         
         raise IndexError("Index was out of range")
@@ -44,11 +43,11 @@ class SinglyLinkedList:
             self.push(value)
             return None
         
-        cursor = self.head
+        current = self.head
 
-        while cursor is not None:
-            previous = cursor
-            cursor = cursor.next
+        while current is not None:
+            previous = current
+            current = current.next
         
         new_node = ListNode(value)
         previous.next = new_node
@@ -62,17 +61,17 @@ class SinglyLinkedList:
             self.push(value)
             return None
         
-        cursor = self.head
+        current = self.head
 
         for i in range(index - 1):
-            if cursor is not None:
-                cursor = cursor.next
+            if current is not None:
+                current = current.next
 
-        if cursor is None:
+        if current is None:
             raise IndexError("Index was out of range")
 
-        previous = cursor
-        following = cursor.next
+        previous = current
+        following = current.next
 
         new_node = ListNode(value, following)
         previous.next = new_node
@@ -86,17 +85,17 @@ class SinglyLinkedList:
             self.head = self.head.next
             return None
 
-        cursor = self.head
+        current = self.head
 
         for i in range(index - 1):
-            if cursor is not None:
-                cursor = cursor.next
+            if current is not None:
+                current = current.next
 
-        if cursor is None:
+        if current is None:
             raise IndexError("Index was out of range")
         
-        following = cursor.next.next
-        cursor.next = following
+        following = current.next.next
+        current.next = following
     
     # O(1)
     def remove(self):
@@ -105,38 +104,46 @@ class SinglyLinkedList:
     
     # O(n)
     def count(self) -> int:
-        cursor = self.head
+        current = self.head
         count = 0
 
-        while cursor is not None:
-            cursor = cursor.next
+        while current is not None:
+            current = current.next
             count = count + 1
         
         return count
     
     def format(self) -> str:
-        cursor = self.head
+        current = self.head
         result = ""
 
-        while cursor is not None:
-            result += str(cursor.value) + ", "
-            cursor = cursor.next
+        while current is not None:
+            result += str(current.value) + ", "
+            current = current.next
         
         result = "[" + result[:-2] + "]"
 
         return result
 
     # TODO: create a method for reversing the list
-
+    def reverse(self):
+        previous = None
+        current = self.head
+        following = self.head
+        
+        while current is not None:
+            following = following.next
+            current.next = previous
+            previous = current
+            current = following
+        
+        self.head = previous
 
 numbers = SinglyLinkedList()
-numbers.append(0)
 numbers.append(1)
 numbers.append(2)
-numbers.push(7)
+numbers.append(3)
 
-numbers.insert(9, 1)
-
-numbers.remove()
+numbers.reverse()
 
 print(numbers.format())
