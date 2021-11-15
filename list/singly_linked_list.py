@@ -6,6 +6,7 @@ class ListNode:
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
+        self.tail = None
     
     # O(n)
     def get_node(self, value):
@@ -34,23 +35,22 @@ class SinglyLinkedList:
     # O(1)
     def push(self, value):
         new_node = ListNode(value, self.head)
+
+        if self.head is None:
+            self.tail = new_node
+
         self.head = new_node
     
-    # O(n)
-    # TODO: make aditional pointer 'tail' to append items at constant time O(1)
+    # O(1)
     def append(self, value):
         if self.head is None:
             self.push(value)
             return None
         
-        current = self.head
-
-        while current is not None:
-            previous = current
-            current = current.next
-        
         new_node = ListNode(value)
-        previous.next = new_node
+        self.tail.next = new_node
+
+        self.tail = new_node
     
     # O(n)
     def insert(self, value, index: int):
@@ -75,6 +75,9 @@ class SinglyLinkedList:
 
         new_node = ListNode(value, following)
         previous.next = new_node
+
+        if following is None:
+            self.tail = new_node
     
     # O(n)
     def delete(self, index: int):
@@ -83,6 +86,10 @@ class SinglyLinkedList:
         
         if index == 0 and self.head is not None:
             self.head = self.head.next
+
+            if self.head is None:
+                self.tail = None
+
             return None
 
         current = self.head
@@ -96,11 +103,17 @@ class SinglyLinkedList:
         
         following = current.next.next
         current.next = following
+
+        if following is None:
+            self.tail = current
     
     # O(1)
     def remove(self):
         if self.head is not None:
             self.head = self.head.next
+        
+        if self.head is None:
+            self.tail = None
     
     # O(n)
     def count(self) -> int:
@@ -125,11 +138,12 @@ class SinglyLinkedList:
 
         return result
 
-    # TODO: create a method for reversing the list
     def reverse(self):
         previous = None
         current = self.head
         following = self.head
+
+        self.tail = self.head
         
         while current is not None:
             following = following.next
@@ -138,12 +152,3 @@ class SinglyLinkedList:
             current = following
         
         self.head = previous
-
-numbers = SinglyLinkedList()
-numbers.append(1)
-numbers.append(2)
-numbers.append(3)
-
-numbers.reverse()
-
-print(numbers.format())
