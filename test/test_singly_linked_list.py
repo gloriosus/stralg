@@ -2,7 +2,7 @@ import unittest
 
 from list.singly_linked_list import SinglyLinkedList
 
-class TestGetFunction(unittest.TestCase):
+class TestGetNodeFunction(unittest.TestCase):
 
     # Test case: [2, 3, 0, 1]
     test_list = SinglyLinkedList()
@@ -13,19 +13,19 @@ class TestGetFunction(unittest.TestCase):
     test_list.append(1)
 
     def test_get_1st_returns_3(self):
-        self.assertEqual(self.test_list.get(1), 3)
+        self.assertEqual(self.test_list.get_node(1), 3)
     
     def test_get_0th_returns_2(self):
-        self.assertEqual(self.test_list.get(0), 2)
+        self.assertEqual(self.test_list.get_node(0), 2)
 
     def test_get_3rd_returns_1(self):
-        self.assertEqual(self.test_list.get(3), 1)
+        self.assertEqual(self.test_list.get_node(3), 1)
     
     def test_get_minus_5th_returns_minus_1(self):
-        self.assertEqual(self.test_list.get(-5), -1)
+        self.assertEqual(self.test_list.get_node(-5), -1)
 
     def test_get_99th_returns_minus_1(self):
-        self.assertEqual(self.test_list.get(99), -1)
+        self.assertEqual(self.test_list.get_node(99), -1)
 
 class TestAddAtHeadFunction(unittest.TestCase):
 
@@ -113,7 +113,7 @@ class TestDeleteAtIndexFunction(unittest.TestCase):
     def test_deleteAtIndex_2(self):
         list_ = self.test_list
         list_.delete(2)
-        self.assertEqual(list_.get(2), 1)
+        self.assertEqual(list_.get_node(2), 1)
     
     def test_deleteAtIndex_4(self):
         list_ = self.test_list
