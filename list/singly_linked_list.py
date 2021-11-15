@@ -38,13 +38,14 @@ class SinglyLinkedList:
         self.head = new_node
     
     # O(n)
+    # TODO: make aditional pointer 'tail' to append items at constant time O(1)
     def append(self, value):
         if self.head is None:
             self.push(value)
             return None
         
         cursor = self.head
-        
+
         while cursor is not None:
             previous = cursor
             cursor = cursor.next
@@ -77,6 +78,7 @@ class SinglyLinkedList:
         previous.next = new_node
     
     # O(n)
+    # TODO: create a method for deleting items at constant time O(1) by traversing the head
     def delete(self, index: int):
         if index < 0:
             raise IndexError("Index was out of range")
@@ -97,11 +99,30 @@ class SinglyLinkedList:
         following = cursor.next.next
         cursor.next = following
     
-    def print_all(self):
+    # O(n)
+    def count(self) -> int:
         cursor = self.head
+        count = 0
+
         while cursor is not None:
-            print(cursor.value)
             cursor = cursor.next
+            count = count + 1
+        
+        return count
+    
+    def format(self) -> str:
+        cursor = self.head
+        result = ""
+
+        while cursor is not None:
+            result += str(cursor.value) + ", "
+            cursor = cursor.next
+        
+        result = "[" + result[:-2] + "]"
+
+        return result
+
+    # TODO: create a method for reversing the list
 
 
 numbers = SinglyLinkedList()
@@ -110,6 +131,6 @@ numbers.append(1)
 numbers.append(2)
 numbers.push(7)
 
-numbers.insert(9, -1)
+numbers.insert(9, 1)
 
-numbers.print_all()
+print(numbers.count())
