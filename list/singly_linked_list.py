@@ -8,99 +8,108 @@ class SinglyLinkedList:
         self.head = None
         self.cursor = self.head
     
-    def get(self, index: int) -> int:
-        if index < 0:
-            self.cursor = None
-            return -1
-           
-        self.cursor = self.head
+    # O(n)
+    def get_node(self, value):
+        cursor = self.head
 
-        for i in range(index):
-            if self.cursor != None:
-                self.cursor = self.cursor.next
+        while cursor is not None:
+            if cursor.value == value:
+                return cursor
+            cursor = cursor.next
 
-        return self.cursor.value if self.cursor != None else -1
-
-    def push(self, value: int) -> None:
-        node = ListNode(value, self.head)
-        self.head = node
-        self.cursor = self.head
         return None
     
-    def append(self, value: int) -> None:
-        if self.head == None:
+    # O(n)
+    def find_value(self, index: int):
+        cursor = self.head
+        count = 0
+
+        while cursor is not None:
+            if count == index:
+                return cursor.value
+            cursor = cursor.next
+            count = count + 1
+        
+        raise IndexError("Index was out of range")
+
+    # O(1)
+    def push(self, value):
+        new_node = ListNode(value, self.head)
+        self.head = new_node
+    
+    # O(n)
+    def append(self, value):
+        if self.head is None:
             self.push(value)
             return None
-
-        while self.cursor != None:
-            previous = self.cursor
-            self.cursor = self.cursor.next
         
-        node = ListNode(value)
-        previous.next = node
-        self.cursor = node
-
-        return None
+        cursor = self.head
+        
+        while cursor is not None:
+            previous = cursor
+            cursor = cursor.next
+        
+        new_node = ListNode(value)
+        previous.next = new_node
     
-    # TODO: add check for negative index
-    def insert(self, index: int, value: int) -> None:
+    # O(n)
+    def insert(self, value, index: int):
+        if index < 0:
+            raise IndexError("Index was out of range")
+
         if index == 0:
             self.push(value)
             return None
         
-        self.cursor = self.head
+        cursor = self.head
 
         for i in range(index - 1):
-            if self.cursor != None:
-                self.cursor = self.cursor.next
+            if cursor is not None:
+                cursor = cursor.next
 
-        if self.cursor == None:
-            return None
+        if cursor is None:
+            raise IndexError("Index was out of range")
 
-        prev = self.cursor
-        next = self.cursor.next
+        previous = cursor
+        following = cursor.next
 
-        node = ListNode(value, next)
-        prev.next = node
-        self.cursor = node
-
-        return None
+        new_node = ListNode(value, following)
+        previous.next = new_node
     
-    def delete(self, index: int) -> None:
+    # O(n)
+    def delete(self, index: int):
         if index < 0:
-            return None
+            raise IndexError("Index was out of range")
 
         if index == 0:
             self.head = self.head.next
             return None
 
-        self.cursor = self.head
+        cursor = self.head
 
         for i in range(index - 1):
-            if self.cursor != None:
-                self.cursor = self.cursor.next
+            if cursor is not None:
+                cursor = cursor.next
 
-        if self.cursor == None:
-            return None
+        if cursor is None:
+            raise IndexError("Index was out of range")
         
-        # Here is some error
-        next = self.cursor.next.next
-        self.cursor.next = next
-
-        return None
+        following = cursor.next.next
+        cursor.next = following
     
-    def listAll(self):
-        self.cursor = self.head
-
-        while self.cursor != None:
-            print(self.cursor.value)
-            self.cursor = self.cursor.next
+    def print_all(self):
+        cursor = self.head
+        while cursor is not None:
+            print(cursor.value)
+            cursor = cursor.next
 
 
 numbers = SinglyLinkedList()
 numbers.append(0)
 numbers.append(1)
 numbers.append(2)
-numbers.delete(-1)
+numbers.push(7)
 
-numbers.listAll()
+numbers.insert(9, -1)
+
+numbers.print_all()
