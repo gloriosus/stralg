@@ -21,15 +21,15 @@ class SinglyLinkedList:
 
         return self.cursor.value if self.cursor != None else -1
 
-    def addAtHead(self, value: int) -> None:
+    def push(self, value: int) -> None:
         node = ListNode(value, self.head)
         self.head = node
         self.cursor = self.head
         return None
     
-    def addAtTail(self, value: int) -> None:
+    def append(self, value: int) -> None:
         if self.head == None:
-            self.addAtHead(value)
+            self.push(value)
             return None
 
         while self.cursor != None:
@@ -43,9 +43,9 @@ class SinglyLinkedList:
         return None
     
     # TODO: add check for negative index
-    def addAtIndex(self, index: int, value: int) -> None:
+    def insert(self, index: int, value: int) -> None:
         if index == 0:
-            self.addAtHead(value)
+            self.push(value)
             return None
         
         self.cursor = self.head
@@ -66,7 +66,7 @@ class SinglyLinkedList:
 
         return None
     
-    def deleteAtIndex(self, index: int) -> None:
+    def delete(self, index: int) -> None:
         if index < 0:
             return None
 
@@ -98,9 +98,9 @@ class SinglyLinkedList:
 
 
 numbers = SinglyLinkedList()
-numbers.addAtTail(0)
-numbers.addAtTail(1)
-numbers.addAtTail(2)
-numbers.deleteAtIndex(-1)
+numbers.append(0)
+numbers.append(1)
+numbers.append(2)
+numbers.delete(-1)
 
 numbers.listAll()

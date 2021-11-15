@@ -7,10 +7,10 @@ class TestGetFunction(unittest.TestCase):
     # Test case: [2, 3, 0, 1]
     test_list = SinglyLinkedList()
 
-    test_list.addAtTail(2)
-    test_list.addAtTail(3)
-    test_list.addAtTail(0)
-    test_list.addAtTail(1)
+    test_list.append(2)
+    test_list.append(3)
+    test_list.append(0)
+    test_list.append(1)
 
     def test_get_1st_returns_3(self):
         self.assertEqual(self.test_list.get(1), 3)
@@ -32,13 +32,13 @@ class TestAddAtHeadFunction(unittest.TestCase):
     # Test case: [2, 3, 0, 1]
     test_list = SinglyLinkedList()
 
-    test_list.addAtTail(2)
-    test_list.addAtTail(3)
-    test_list.addAtTail(0)
-    test_list.addAtTail(1)
+    test_list.append(2)
+    test_list.append(3)
+    test_list.append(0)
+    test_list.append(1)
     
     def test_addAtHead_7(self):
-        self.test_list.addAtHead(7)
+        self.test_list.push(7)
         self.assertEqual(self.test_list.head.value, 7)
 
 class TestAddAtTailFunction(unittest.TestCase):
@@ -46,18 +46,18 @@ class TestAddAtTailFunction(unittest.TestCase):
     # Test case: [2, 3, 0, 1]
     test_list = SinglyLinkedList()
 
-    test_list.addAtTail(2)
-    test_list.addAtTail(3)
-    test_list.addAtTail(0)
-    test_list.addAtTail(1)
+    test_list.append(2)
+    test_list.append(3)
+    test_list.append(0)
+    test_list.append(1)
 
     def test_addAtTail_8(self):
-        self.test_list.addAtTail(8)
+        self.test_list.append(8)
         self.assertEqual(self.test_list.cursor.value, 8)
     
     def test_addAtTail_when_list_is_empty(self):
         empty_list = SinglyLinkedList()
-        empty_list.addAtTail(5)
+        empty_list.append(5)
         self.assertEqual(empty_list.cursor, empty_list.head)
 
 class TestAddAtIndexFunction(unittest.TestCase):
@@ -65,34 +65,34 @@ class TestAddAtIndexFunction(unittest.TestCase):
     # Test case: [2, 3, 0, 1]
     test_list = SinglyLinkedList()
 
-    test_list.addAtTail(2)
-    test_list.addAtTail(3)
-    test_list.addAtTail(0)
-    test_list.addAtTail(1)
+    test_list.append(2)
+    test_list.append(3)
+    test_list.append(0)
+    test_list.append(1)
 
     def test_addAtIndex_0(self):
         list_ = self.test_list
-        list_.addAtIndex(0, 7)
+        list_.insert(0, 7)
         self.assertEqual(list_.head.value, 7)
 
     def test_addAtIndex_4(self):
         list_ = self.test_list
-        list_.addAtIndex(4, 8)
+        list_.insert(4, 8)
         self.assertEqual(list_.cursor.value, 8)
     
     def test_addAtIndex_2(self):
         list_ = self.test_list
-        list_.addAtIndex(2, 9)
+        list_.insert(2, 9)
         self.assertEqual(list_.cursor.value, 9)
     
     def test_addAtIndex_minus_1(self):
         list_ = self.test_list
-        list_.addAtIndex(-1, 9)
+        list_.insert(-1, 9)
         self.assertEqual(list_.cursor.value, 2)
 
     def test_addAtIndex_5(self):
         list_ = self.test_list
-        list_.addAtIndex(5, 10)
+        list_.insert(5, 10)
         self.assertEqual(list_.cursor, None)
 
 class TestDeleteAtIndexFunction(unittest.TestCase):
@@ -100,22 +100,22 @@ class TestDeleteAtIndexFunction(unittest.TestCase):
     # Test case: [2, 3, 0, 1]
     test_list = SinglyLinkedList()
 
-    test_list.addAtTail(2)
-    test_list.addAtTail(3)
-    test_list.addAtTail(0)
-    test_list.addAtTail(1)
+    test_list.append(2)
+    test_list.append(3)
+    test_list.append(0)
+    test_list.append(1)
 
     def test_deleteAtIndex_0(self):
         list_ = self.test_list
-        list_.deleteAtIndex(0)
+        list_.delete(0)
         self.assertEqual(list_.head.value, 3)
     
     def test_deleteAtIndex_2(self):
         list_ = self.test_list
-        list_.deleteAtIndex(2)
+        list_.delete(2)
         self.assertEqual(list_.get(2), 1)
     
     def test_deleteAtIndex_4(self):
         list_ = self.test_list
-        list_.deleteAtIndex(4)
+        list_.delete(4)
         self.assertEqual(list_.head.value, 3)
