@@ -78,12 +78,11 @@ class SinglyLinkedList:
         previous.next = new_node
     
     # O(n)
-    # TODO: create a method for deleting items at constant time O(1) by traversing the head
     def delete(self, index: int):
         if index < 0:
             raise IndexError("Index was out of range")
-
-        if index == 0:
+        
+        if index == 0 and self.head is not None:
             self.head = self.head.next
             return None
 
@@ -98,6 +97,11 @@ class SinglyLinkedList:
         
         following = cursor.next.next
         cursor.next = following
+    
+    # O(1)
+    def remove(self):
+        if self.head is not None:
+            self.head = self.head.next
     
     # O(n)
     def count(self) -> int:
@@ -133,4 +137,6 @@ numbers.push(7)
 
 numbers.insert(9, 1)
 
-print(numbers.count())
+numbers.remove()
+
+print(numbers.format())
